@@ -121,6 +121,19 @@ class Student {
             throw $e; // Re-throw the exception for higher-level handling
         }
     }
+        public function displayAll(){
+        try {
+            $sql = "SELECT *, CASE WHEN gender = '1' THEN 'M' ELSE 'F' END as formatted_gender FROM students LIMIT 10";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            // Handle any potential errors here
+            echo "Error: " . $e->getMessage();
+            throw $e; // Re-throw the exception for higher-level handling
+        }
+    }
  
     /*
         sample simple tests
