@@ -1,3 +1,5 @@
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <?php
 include_once("../db.php"); // Include the Database class file
 include_once("../student.php"); // Include the Student class file
