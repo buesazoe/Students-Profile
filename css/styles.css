@@ -2,8 +2,8 @@
     position: fixed;
     width: 250px;
     height: 100%;
-    background-color: #D8F3DC; /* Background color using the provided hex code */
-    color: #74C69D; /* Text color using the provided hex code */
+    background-color: #f1aa70; /* Background color using the provided hex code */
+    color: #695A49; /* Text color using the provided hex code */
     padding: 20px;
 }
 
@@ -23,24 +23,26 @@
 
 .sidebar a {
     text-decoration: none;
-    color: #74C69D; /* Text color using the provided hex code */
+    color: #8A5D2A; /* Text color using the provided hex code */
     font-size: 18px;
 }
 
 .content {
     margin-left: 270px; /* Adjust to match the sidebar width */
     padding: 50px;
+    position: relative;
 }
 
 /* Highlight the selected menu item */
 .sidebar a:hover {
-    color: #B7E4C7; /* Hover color using the provided hex code */
+    color: #C68E4F; /* Hover color using the provided hex code */
+    
 }
 
 /* Body */
 body {
     font-family: Arial, sans-serif;
-    background-color: #95D5B2; /* Background color using the provided hex code */
+    background-color: #fcf1df; /* Background color using the provided hex code */
     color: #333; /* Text color */
     margin: 0;
     padding: 0;
@@ -48,7 +50,7 @@ body {
 
 /* Header */
 h1 {
-    color: #74C69D; /* Header color using the provided hex code */
+    color: #3f3223; /* Header color using the provided hex code */
 }
 
 /* Existing CSS remains the same */
@@ -61,20 +63,20 @@ h1 {
 
 .dropdown .dropbtn {
     text-decoration: none;
-    color: #74C69D; /* Text color using the provided hex code */
+    color: #8A5D2A; /* Text color using the provided hex code */
     font-size: 18px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #D8F3DC; /* Background color for the dropdown using the provided hex code */
+    background-color: #f8d9c0; /* Background color for the dropdown using the provided hex code */
     min-width: 160px;
     z-index: 1;
 }
 
 .dropdown-content a {
-    color: #74C69D; /* Text color using the provided hex code */
+    color: #8A5D2A; /* Text color using the provided hex code */
     text-decoration: none;
     display: block;
     padding: 10px;
@@ -89,25 +91,25 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-    background-color: #D8F3DC; /* Table background color using the provided hex code */
-    border: 1px solid #95D5B2; /* Table border color using the provided hex code */
+    background-color: #fff6e2; /* Table background color using the provided hex code */
+    border: 1px solid #695A49; /* Table border color using the provided hex code */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #95D5B2; /* Table border color using the provided hex code */
+    border-bottom: 1px solid #695A49; /* Table border color using the provided hex code */
 }
 
 th {
-    background-color: #B7E4C7; /* Header color using the provided hex code */
+    background-color: #f8d9c0; /* Header color using the provided hex code */
 }
 
 /* Forms */
 form {
-    background-color: #D8F3DC; /* Form background color using the provided hex code */
-    border: 1px solid #95D5B2; /* Form border color using the provided hex code */
+    background-color: #FDE5CB ; /* Form background color using the provided hex code */
+    border: 1px solid #695A49; /* Form border color using the provided hex code */
     padding: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 500px;
@@ -128,7 +130,7 @@ form {
 label {
     display: block;
     margin-bottom: 10px;
-    color: #74C69D; /* Text color using the provided hex code */
+    color: #443321 ; /* Text color using the provided hex code */
 }
 
 input[type="text"],
@@ -137,27 +139,27 @@ select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #74C69D; /* Form border color using the provided hex code */
+    border: 1px solid #695A49; /* Form border color using the provided hex code */
     border-radius: 5px;
 }
 
 input[type="submit"] {
-    background-color: #74C69D; /* Submit button color using the provided hex code */
-    color: #D8F3DC; /* Text color using the provided hex code */
+    background-color: #F49C39; /* Submit button color using the provided hex code */
+    color: #ffefe0; /* Text color using the provided hex code */
     padding: 10px 20px;
-    border: none;
+    border: 2px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: #3DAC78; /* Slightly darker hover color using the provided hex code */
+    background-color: #d47100; /* Slightly darker hover color using the provided hex code */
 }
 
 /* Header */
 header {
-    background-color: #D8F3DC;
-    color: #fff;
+    background-color: #f1aa70;
+    color: rgb(240, 236, 236);
     padding: 20px 0;
     text-align: center;
 }
@@ -182,8 +184,8 @@ header {
 .button-link {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #74C69D; /* Button background color */
-    color: #fff; /* Button text color */
+    background-color: #F49C39; /* Button background color */
+    color: rgb(65, 34, 22); /* Button text color */
     text-decoration: none;
     border: none;
     border-radius: 5px;
@@ -192,13 +194,34 @@ header {
 }
 
 .button-link:hover {
-    background-color: #3DAC78; /* Button background color on hover */
+    background-color: #d47100; /* Button background color on hover */
 }
+
+
+button.edit-button {
+    background-color: yellow;
+    color: black;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.delete-button {
+    background-color: red;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
 
 /* Footer */
 footer {
-    background-color: #D8F3DC;
-    color: #fff;
+    background-color: #f1aa70;
+    color: rgb(83, 73, 67);
     padding: 20px 0;
     text-align: center;
 }
@@ -226,5 +249,6 @@ footer {
 
 /* Change font color for links on hover */
 .footer-links a:hover {
-    color: #74C69D;
+    color: #a86627;
 }
+
