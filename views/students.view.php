@@ -35,25 +35,25 @@ $student = new Student($db);
             </tr>
         </thead>
         <tbody>
-            <!-- You'll need to dynamically generate these rows with data from your database -->
-       
-            
-            
             <?php
             $results = $student->displayAll(); 
             foreach ($results as $result) {
             ?>
-            <tr>
+            <tr id="row_<?php echo $result['id']; ?>">
                 <td><?php echo $result['student_number']; ?></td>
                 <td><?php echo $result['first_name']; ?></td>
                 <td><?php echo $result['middle_name']; ?></td>
                 <td><?php echo $result['last_name']; ?></td>
-                <td><?php echo $result['gender']; ?></td>
-                <td><?php echo $result['birthday']; ?></td>
+                <td><?php echo $result['formatted_gender']; ?></td>
+                <td><?php echo $result['formatted_birthday']; ?></td>
                 <td>
-                    <a href="student_edit.php?id=<?php echo $result['id']; ?>">Edit</a>
+                    <a href="student_edit.php?id=<?php echo $result['id']; ?>">
+                        <button class="edit-button" type="button">Edit</button>
+                    </a>
                     |
-                    <a href="student_delete.php?id=<?php echo $result['id']; ?>">Delete</a>
+                    <button class="delete-button" type="button" data-id="<?php echo $result['id']; ?>">
+                        Delete
+                    </button>
                 </td>
             </tr>
         <?php } ?>
@@ -72,5 +72,27 @@ $student = new Student($db);
 
 
     <p></p>
+
+    <script>
+    $(document).ready(function() {
+        // Attach a click event handler to all delete buttons
+        $('.delete-button').click(function() {
+            // Get the record id from the button's data-id attribute
+            var recordId = $(this).data('id');
+
+            // Make an AJAX request to delete the record
+            $.get('student_delete.php?id=' + recordId, function(response) {
+                // Check the response from the server
+                if (response === 'success') {
+                    // Remove the corresponding table row
+                    $('#row_' + recordId).remove();
+                } else {
+                    // Handle error if needed
+                    alert('Failed to delete the record.');
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
