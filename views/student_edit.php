@@ -1,6 +1,6 @@
 <?php
-include_once("../db.php"); // Include the Database class file
-include_once("../student.php"); // Include the Student class file
+include_once("../db.php");
+include_once("../student.php");
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -55,30 +55,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include('../includes/navbar.php'); ?>
 
     <div class="content">
-    <h2>Edit Student Information</h2>
-    <form action="" method="post">
-        <input type="hidden" name="id" value="<?php echo $studentData['id']; ?>">
-        
-        <label for="student_number">Student Number:</label>
-        <input type="text" name="student_number" id="student_number" value="<?php echo $studentData['student_number']; ?>">
-        
-        <label for="first_name">First Name:</label>
-        <input type="text" name="first_name" id="first_name" value="<?php echo $studentData['first_name']; ?>">
-        
-        <label for="middle_name">Middle Name:</label>
-        <input type="text" name= "middle_name" id="middle_name" value="<?php echo $studentData['middle_name']; ?>">
-        
-        <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" id="last_name" value="<?php echo $studentData['last_name']; ?>">
-        
-        <label for="gender">Gender:</label>
-        <input type="text" name="gender" id="gender" value="<?php echo $studentData['gender']; ?>">
-        
-        <label for="birthday">Birthdate:</label>
-        <input type="text" name="birthday" id="birthday" value="<?php echo $studentData['birthday']; ?>">
-        
-        <input type="submit" value="Update">
-    </form>
+        <h2>Edit Student Information</h2>
+        <form action="" method="post">
+            <input type="hidden" name="id" value="<?php echo $studentData['id']; ?>">
+            
+            <label for="student_number">Student Number:</label>
+            <input type="text" name="student_number" id="student_number" value="<?php echo $studentData['student_number']; ?>">
+            
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" id="first_name" value="<?php echo $studentData['first_name']; ?>">
+            
+            <label for="middle_name">Middle Name:</label>
+            <input type="text" name= "middle_name" id="middle_name" value="<?php echo $studentData['middle_name']; ?>">
+            
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" id="last_name" value="<?php echo $studentData['last_name']; ?>">
+            
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender">
+                <option value="1" <?php echo ($studentData['gender'] === '1') ? 'selected' : ''; ?>>Male</option>
+                <option value="0" <?php echo ($studentData['gender'] === '0') ? 'selected' : ''; ?>>Female</option>
+            </select>
+            
+            <label for="birthday">Birthdate:</label>
+            <input type="date" name="birthday" id="birthday" value="<?php echo date('Y-m-d', strtotime($studentData['birthday'])); ?>">
+            
+            <input type="submit" value="Update">
+        </form>
     </div>
     <?php include('../templates/footer.html'); ?>
 </body>
