@@ -68,26 +68,36 @@ class Student {
                     gender = :gender,
                     birthday = :birthday
                     WHERE id = :id";
-
+    
             $stmt = $this->db->getConnection()->prepare($sql);
             // Bind parameters
-            $stmt->bindValue(':id', $data['id']);
-            $stmt->bindValue(':student_number', $data['student_number']);
-            $stmt->bindValue(':first_name', $data['first_name']);
-            $stmt->bindValue(':middle_name', $data['middle_name']);
-            $stmt->bindValue(':last_name', $data['last_name']);
-            $stmt->bindValue(':gender', $data['gender']);
-            $stmt->bindValue(':birthday', $data['birthday']);
-
+            $stmt->bindParam(':id', $data['id'], PDO::PARAM_INT);
+            $stmt->bindParam(':student_number', $data['student_number']);
+            $stmt->bindParam(':first_name', $data['first_name']);
+            $stmt->bindParam(':middle_name', $data['middle_name']);
+            $stmt->bindParam(':last_name', $data['last_name']);
+    
+            // Check if 'gender' is a string or an integer in the database
+            if (is_numeric($data['gender'])) {
+                // If 'gender' is numeric, bind as integer
+                $stmt->bindParam(':gender', $data['gender'], PDO::PARAM_INT);
+            } else {
+                // If 'gender' is not numeric, bind as string
+                $stmt->bindParam(':gender', $data['gender']);
+            }
+    
+            $stmt->bindParam(':birthday', $data['birthday']);
+    
             // Execute the query
             $stmt->execute();
-
+    
             return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             throw $e; // Re-throw the exception for higher-level handling
         }
     }
+    
 
     public function delete($id) {
         try {
@@ -108,110 +118,25 @@ class Student {
         }
     }
 
-    public function displayAll(){
+    // Display birthdate in 'Jan 1, 2020' format
+    public function displayAll() {
         try {
-            $sql = "SELECT * FROM students LIMIT 10"; // Modify the table name to match your database
+            $sql = "SELECT *, 
+                    CASE WHEN gender = '1' THEN 'M' ELSE 'F' END as formatted_gender,
+                    DATE_FORMAT(birthday, '%b %e, %Y') as formatted_birthday 
+                    FROM students LIMIT 10";
+
             $stmt = $this->db->getConnection()->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
             return $result;
         } catch (PDOException $e) {
             // Handle any potential errors here
             echo "Error: " . $e->getMessage();
             throw $e; // Re-throw the exception for higher-level handling
-        }
-    }
-        public function displayAll(){
-        try {
-            $sql = "SELECT *, CASE WHEN gender = '1' THEN 'M' ELSE 'F' END as formatted_gender FROM students LIMIT 10";
-            $stmt = $this->db->getConnection()->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        } catch (PDOException $e) {
-            // Handle any potential errors here
-            echo "Error: " . $e->getMessage();
-            throw $e; // Re-throw the exception for higher-level handling
-        }
-    }
- 
-    /*
-        sample simple tests
-    */
-    public function testCreateStudent() {
-        $data = [
-            'student_number' => 'S12345',
-            'first_name' => 'John',
-            'middle_name' => 'Doe',
-            'last_name' => 'Smith',
-            'gender' => '1',
-            'birthday' => '1990-01-15',
-        ];
-
-        $student_id = $this->create($data);
-
-        if ($student_id !== null) {
-            echo "Test passed. Student created with ID: " . $student_id . PHP_EOL;
-            return $student_id;
-        } else {
-            echo "Test failed. Student creation unsuccessful." . PHP_EOL;
-        }
-    }
-
-    public function testReadStudent($id) {
-        $studentData = $this->read($id);
-
-        if ($studentData !== false) {
-            echo "Test passed. Student data read successfully: " . PHP_EOL;
-            print_r($studentData);
-        } else {
-            echo "Test failed. Unable to read student data." . PHP_EOL;
-        }
-    }
-
-    public function testUpdateStudent($id, $data) {
-        $success = $this->update($id, $data);
-
-        if ($success) {
-            echo "Test passed. Student data updated successfully." . PHP_EOL;
-        } else {
-            echo "Test failed. Unable to update student data." . PHP_EOL;
-        }
-    }
-
-    public function testDeleteStudent($id) {
-        $deleted = $this->delete($id);
-
-        if ($deleted) {
-            echo "Test passed. Student data deleted successfully." . PHP_EOL;
-        } else {
-            echo "Test failed. Unable to delete student data." . PHP_EOL;
         }
     }
 }
-
-
-$student = new Student(new Database());
-
-// Test the create method
-$student_id = $student->testCreateStudent();
-
-// Test the read method with the created student ID
-$student->testReadStudent($student_id);
-
-// Test the update method with the created student ID and updated data
-$update_data = [
-    'id' => $student_id,
-    'student_number' => 'S67890',
-    'first_name' => 'Alice',
-    'middle_name' => 'Jane',
-    'last_name' => 'Doe',
-    'gender' => '0',
-    'birthday' => '1995-05-20',
-];
-$student->testUpdateStudent($student_id, $update_data);
-
-// Test the delete method with the created student ID
-$student->testDeleteStudent($student_id);
 
 ?>
